@@ -70,6 +70,15 @@ def create_db():
     mydb.close()
     return "Database created successfully"
 
+@app.get("/drop_db")
+def drop_db():
+    mydb = get_connection()
+    cursor = mydb.cursor()
+    cursor.execute("DROP DATABASE IF EXISTS datasciencedb;")
+    cursor.close()
+    mydb.close()
+    return "Database dropped successfully"
+
 @app.get("/create_table")
 def create_table():
     mydb = get_connection()
@@ -83,7 +92,7 @@ def create_table():
     mydb.close()
     return "Table created successfully"  
 
-@app.get("/insert_employee")
+@app.post("/insert_employee")
 def insert_employee():
     mydb = get_connection()
     cursor = mydb.cursor()
